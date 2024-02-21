@@ -5,6 +5,7 @@ import java.util.Date;
 import com.example.operation.Compte.Compte;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -53,15 +54,14 @@ public class Operation {
     private String description;
 
 
-    @Lob
-    @Column(name = "justificatif", columnDefinition = "bytea")
-    private byte[] justificatif;
+  
+  
     
     @Column(name = "TVAdeductible")
     private String TVAdeductible;
     
     
-    
+
 	@Column(name = "tauxTVA")
     private double tauxTVA;
 	
@@ -80,6 +80,8 @@ public class Operation {
 		TVAdeductible = tVAdeductible;
 	}
 
+	
+
 	public double getTauxTVA() {
 		return tauxTVA;
 	}
@@ -88,10 +90,7 @@ public class Operation {
 		this.tauxTVA = tauxTVA;
 	}
 
-	public byte[] getJustificatif() {
-		return justificatif;
-	}
-    
+
 	
 
 	
@@ -113,9 +112,7 @@ public class Operation {
 
 		
 
-		public void setJustificatif(byte[] justificatif) {
-			this.justificatif = justificatif;
-		}
+	
 
 	public Long getId() {
 		return id;

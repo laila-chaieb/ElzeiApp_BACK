@@ -38,6 +38,24 @@ public class OperationService implements OpService {
 	        }
 	        return null;
 	}
+	 public Operation update(Long id, Operation updatedOperation) {
+	        Operation existingoperation = findById(id);
+	        if (existingoperation != null) {
+	        	existingoperation.setDescription(updatedOperation.getDescription());
+	        	existingoperation.setTauxTVA(updatedOperation.getTauxTVA());
+	        	existingoperation.setTVAdeductible(updatedOperation.getTVAdeductible());
+	            return operationRepo.save(existingoperation);
+	        }
+	        return null;
+	    }
+
+	@Override
+	public Operation save(Operation operation) {
+		operationRepo.save(operation);
+        return operation;
+	}
+	
+	
 }
 
 

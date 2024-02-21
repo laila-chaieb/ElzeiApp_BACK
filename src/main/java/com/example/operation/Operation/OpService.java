@@ -10,5 +10,9 @@ public interface OpService {
     List<Operation> findByStatus(String status);
     List<Operation> findByType(String type);
     Operation findById(Long id);
+	Operation update(Long id, Operation updatedOperation);
+	Operation save(Operation operation);
+
+
  	
 }
