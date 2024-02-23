@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,7 @@ import com.example.operation.Classe.Classe;
 
 
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200",methods = {RequestMethod.PUT, RequestMethod.OPTIONS})
 @RestController
 @RequestMapping("/api/v1/test")
 public class OperationController {
@@ -57,17 +58,30 @@ public class OperationController {
     @ResponseBody
     @PutMapping("/operation/{id}")
     public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Operation operationData) {
-    	Operation existingOperation = opService.findById(id);
-        
+        Operation existingOperation = opService.findById(id);
+
         if (existingOperation == null) {
             return new ResponseEntity<>("Operation not found", HttpStatus.NOT_FOUND);
         }
-        
-        existingOperation.setDescription(operationData.getDescription());
-        existingOperation.setTauxTVA(operationData.getTauxTVA());
-        existingOperation.setTVAdeductible(operationData.getTVAdeductible());
+
+        // Mettre à jour uniquement les champs non nuls
+        if (operationData.getDescription() != null) {
+            existingOperation.setDescription(operationData.getDescription());
+        }
+
+        if (operationData.getTauxTVA() != 0.0) {
+            existingOperation.setTauxTVA(operationData.getTauxTVA());
+        }
+
+        if (operationData.getTVAdeductible() != null) {
+            existingOperation.setTVAdeductible(operationData.getTVAdeductible());
+        }
+
         opService.save(existingOperation);
 
-        return new ResponseEntity<>("Operation updated successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Operation successfully", HttpStatus.OK);
     }
+
+	
+	
 }
