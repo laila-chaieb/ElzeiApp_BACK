@@ -51,7 +51,6 @@ public class JustificatifService {
             return "Error uploading file: " + e.getMessage();
         }
     }
-
     public byte[] downloadImage(long id) {
         Optional<Justificatif> dbImageData = repository.findById(id);
 

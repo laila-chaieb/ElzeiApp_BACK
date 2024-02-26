@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1/test/justificatif")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200") 
 public class JustifController {
 
     @Autowired
@@ -34,7 +34,7 @@ public class JustifController {
     public ResponseEntity<byte[]> downloadJustificatif(@PathVariable long id) {
         try {
             byte[] image = justificatifService.downloadImage(id);
-            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
+            return ResponseEntity.ok().contentType(MediaType.APPLICATION_PDF).body(image);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new byte[0]);
         }
