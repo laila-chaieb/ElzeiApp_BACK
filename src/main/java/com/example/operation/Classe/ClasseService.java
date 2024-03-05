@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 @Service
-public class ClasseService implements ClassService {
+public class ClasseService implements ClassInterface {
     @Autowired
     private ClasseRepo classRepo;
 
+    
+    //service d'ajout
     @Override
     public Classe save(Classe classe) {
         classRepo.save(classe);

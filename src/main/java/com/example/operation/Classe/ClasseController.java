@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/test")
 public class ClasseController {
 	@Autowired
-	ClassService ClassService;
+	ClassInterface ClassService;
 	
-	
+	//liste des classes
 	@ResponseBody
 	@GetMapping("/classes")
 	  public List<Classe> getAll()  {
 		return   ClassService.findAll();
 	     }
 	
-	
+	// Ajouter une classe
 	@ResponseBody
 	@PostMapping("/classes")
 	public void save(@RequestBody Classe classe) {
@@ -39,12 +39,16 @@ public class ClasseController {
 		return ClassService.findById(id);
 
 	}
+	
+	//Supprimer une classe
 	@ResponseBody
 	@DeleteMapping("/classes/{id}")
 	public void delete(@PathVariable("id") Long id) {
 		ClassService.delete(id);
 	}
 	
+	
+	//Modifier une classe
 	 @ResponseBody
 	    @PutMapping("/classes/{id}")
 	    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Classe classeData) {
@@ -54,9 +58,9 @@ public class ClasseController {
 	            return new ResponseEntity<>("Classe not found", HttpStatus.NOT_FOUND);
 	        }
 	        
-	        existingClasse.setNom(classeData.getNom()); // Update other properties as needed
-	        existingClasse.setDescription(classeData.getDescription()); // Update other properties as needed
-	        existingClasse.setNumcl(classeData.getNumcl()); // Update other properties as needed
+	        existingClasse.setNom(classeData.getNom()); 
+	        existingClasse.setDescription(classeData.getDescription()); 
+	        existingClasse.setNumcl(classeData.getNumcl()); 
 
 	        ClassService.save(existingClasse);
 

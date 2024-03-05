@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.example.operation.Classe.Classe;
 
-public interface CompteServicee {
+public interface CompteInterface {
 
     @Transactional
     List<Compte> findAll();
@@ -21,7 +21,7 @@ public interface CompteServicee {
 
     CompteResponseDTO mapCompteToResponseDTO(Compte compte);
 
-    List<CompteResponseDTO> findAllResponseDTO(); // Nouvelle méthode pour récupérer une liste de CompteResponseDTO
+    List<CompteResponseDTO> findAllResponseDTO(); 
     List<Compte> getComptesByClasseId(Long classeId);
     Classe getClassById(Long id);
 }

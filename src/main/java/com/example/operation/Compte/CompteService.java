@@ -13,7 +13,7 @@ import com.example.operation.Classe.ClasseRepo;
 
 import jakarta.transaction.Transactional;
 @Service
-public class CompteService implements CompteServicee {
+public class CompteService implements CompteInterface {
 	@Autowired
 	 CompteRepo compRepo ;
 	@Autowired
@@ -55,8 +55,6 @@ public class CompteService implements CompteServicee {
 	        if (classeOptional.isPresent()) {
 	            return classeOptional.get();
 	        } else {
-	            // Gérez le cas où aucune classe n'a été trouvée avec l'ID donné.
-	            // Vous pouvez retourner null ou jeter une exception appropriée selon vos besoins.
 	            return null;
 	        }
 	    }
@@ -72,7 +70,8 @@ public class CompteService implements CompteServicee {
 
 			return compRepo.findAll();
 		}
-
+		@Override
+		@Transactional
 		    public Compte update(Long id, Compte updatedCompte) {
 		    	Compte existingCompte = findById(id);
 		    	if (existingCompte != null) {

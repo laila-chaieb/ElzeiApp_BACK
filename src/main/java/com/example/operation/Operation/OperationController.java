@@ -26,7 +26,7 @@ import com.example.operation.Classe.Classe;
 @RequestMapping("/api/v1/test")
 public class OperationController {
     @Autowired
-    OpService opService;
+    OperationInterface opService;
 
     @ResponseBody
     @GetMapping("/operation")
@@ -58,30 +58,13 @@ public class OperationController {
     @ResponseBody
     @PutMapping("/operation/{id}")
     public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Operation operationData) {
-        Operation existingOperation = opService.findById(id);
+        Operation updatedOperation = opService.update(id, operationData);
 
-        if (existingOperation == null) {
+        if (updatedOperation == null) {
             return new ResponseEntity<>("Operation not found", HttpStatus.NOT_FOUND);
         }
 
-        // Mettre à jour uniquement les champs non nuls
-        if (operationData.getDescription() != null) {
-            existingOperation.setDescription(operationData.getDescription());
-        }
-
-        if (operationData.getTauxTVA() != 0.0) {
-            existingOperation.setTauxTVA(operationData.getTauxTVA());
-        }
-
-        if (operationData.getTVAdeductible() != null) {
-            existingOperation.setTVAdeductible(operationData.getTVAdeductible());
-        }
-
-        opService.save(existingOperation);
-
-        return new ResponseEntity<>("Operation successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Operation updated successfully", HttpStatus.OK);
     }
-
-	
-	
+ 
 }

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @SpringBootApplication
-@ComponentScan(basePackages = "com.example.operation") // Ajouter le package de la classe WebConfig ici
+@ComponentScan(basePackages = "com.example.operation") //  le package de la classe WebConfig 
 
 public class OperationApplication {
 

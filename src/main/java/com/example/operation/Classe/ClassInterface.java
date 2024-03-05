@@ -2,7 +2,7 @@ package com.example.operation.Classe;
 
 import java.util.List;
 
-public interface ClassService {
+public interface ClassInterface {
 	 List<Classe> findAll();
 		
 	 Classe save(Classe classe);
