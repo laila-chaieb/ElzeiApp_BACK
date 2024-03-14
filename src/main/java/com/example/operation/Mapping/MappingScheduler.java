@@ -15,8 +15,7 @@ public class MappingScheduler {
 
     @Scheduled(fixedRate = 200) 
     public String performMapping() {
-        // Appel du service qui effectue le mapping
-        mappingService.performMapping();
+      
         System.out.println("Tâche planifiée exécutée !");
         return ("Classe updated successfully");
     }

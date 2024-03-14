@@ -34,9 +34,6 @@ public class MappingService {
             operation.setMontant(rawOperation.getMontant());
             operation.setType(rawOperation.getType());
             
-
-       
-
             return operation;
         }
     }
