@@ -72,7 +72,7 @@ public class OperationService implements OperationInterface {
                 if (updatedCompte != null) {
                     // Si le compte existe, le mettre à jour pour l'opération
                     existingOperation.setCompte(updatedCompte);
-                    existingOperation.setStatus("Validee");
+                    existingOperation.setStatus("Validée");
                     logger.debug("Compte mis à jour avec succès : {}", updatedCompte);
                 } else {
                     // Si le compte n'existe pas, gérer l'erreur
