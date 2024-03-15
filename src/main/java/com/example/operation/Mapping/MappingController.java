@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,7 @@ import com.example.operation.cfonbmessage.MessageCfonb;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/v1/test")
+@RequestMapping("/api/v1/test/mapping")
 public class MappingController {
 	
 	@Autowired
@@ -22,18 +23,19 @@ public class MappingController {
 	
 	
 	// Mapping from RawOperation
-	@ResponseBody
+	@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
 	@PostMapping("/rawOperation")
-	public void mapFromRawOperation(@RequestBody RawOperation rawOperation) {
-		MappingInterface.mapFromRawOperation(rawOperation);
+	public void mapFromRawOperation() {
+	
+		MappingInterface.copyRawOperationsToOperations();
 	}
 
 	
 	// Mapping from RawOperation
-	@ResponseBody
+	@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
 	@PostMapping("/mapFromCfonb")
-	public void mapFromCfonb(@RequestBody MessageCfonb messageCfonb) {
-		MappingInterface.mapFromCfonb(messageCfonb);
+	public void mapFromCfonb() {
+		MappingInterface.copyMessageCfonbsToOperations();
 	}
 
 }
