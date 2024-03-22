@@ -1,5 +1,6 @@
 package com.example.operation.Operation;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,6 @@ public interface OperationInterface {
     Operation findById(Long id);
 	Operation update(Long id, Operation updatedOperation);
 	Operation save(Operation operation);
-
-
+	
  	
 }

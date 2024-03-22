@@ -1,5 +1,6 @@
 package com.example.operation.Operation;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,15 +8,27 @@ import org.springframework.stereotype.Service;
 
 import com.example.operation.Compte.Compte;
 import com.example.operation.Compte.CompteRepo;
+import com.jayway.jsonpath.Predicate;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Service
 public class OperationService implements OperationInterface {
-    @Autowired
-    private OperationRepo operationRepo;
-    @Autowired
-    private CompteRepo compteRepository ;
+	
+	   @Autowired
+	    private OperationRepo operationRepo;
+	    @Autowired
+	    private CompteRepo compteRepository ;
+	
+
+ 
 
     @Override
     public List<Operation> findAll() {

@@ -13,10 +13,12 @@ public class MappingScheduler {
     @Autowired
     private MappingService mappingService; // Service qui effectue le mapping des données
 
-    @Scheduled(fixedRate = 200) 
-    public String performMapping() {
+
+    @Scheduled(cron = "0 0 7 * * ?") // Exécuter tous les jours à 7h00
+    public void performMapping() {
+        // Appel des méthodes de mapping
+        mappingService.copyMessageCfonbsToOperations();
+        mappingService.copyRawOperationsToOperations();
       
-        System.out.println("Tâche planifiée exécutée !");
-        return ("Classe updated successfully");
     }
 }

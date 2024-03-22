@@ -1,5 +1,6 @@
 package com.example.operation.Operation;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,9 @@ import com.example.operation.Classe.Classe;
 public class OperationController {
     @Autowired
     OperationInterface opService;
-
+    @Autowired
+    OperationRepo operationRepo; // Ajoutez cette ligne pour injecter OperationRepo
+    
     @ResponseBody
     @GetMapping("/operation")
     public List<Operation> getAll(@RequestParam(required = false) String status,
@@ -44,6 +47,25 @@ public class OperationController {
         }
     }
 
+    
+  /*  
+    @GetMapping("/operation/exist")
+    public ResponseEntity<String> checkOperationExists(
+     
+            @RequestParam double montant,
+            @RequestParam char type
+   ) {
+        
+        // Utilisez la méthode existsByDateOPAndDateValAndMontantAndTypeAndDescription
+        boolean operationExists = operationRepo.existsByMontantAndType( montant, type);
+
+        if (operationExists) {
+            return new ResponseEntity<>("L'opération existe", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("L'opération n'existe pas", HttpStatus.NOT_FOUND);
+        }
+    }
+*/
     
     @ResponseBody
 	@GetMapping("/operation/{id}")
