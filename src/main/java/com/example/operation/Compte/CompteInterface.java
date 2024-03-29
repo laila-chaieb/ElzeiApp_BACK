@@ -14,14 +14,16 @@ public interface CompteInterface {
     Compte save(Compte compte);
 
     Compte findById(Long id);
+    Compte getCompteById(Long id);
 
     void delete(Long id);
 
     Compte update(Long id, Compte updatedCompte);
 
-    CompteResponseDTO mapCompteToResponseDTO(Compte compte);
+    CompteDTO mapCompteToResponseDTO(Compte compte);
 
-    List<CompteResponseDTO> findAllResponseDTO(); 
+    List<CompteDTO> findAllResponseDTO(); 
     List<Compte> getComptesByClasseId(Long classeId);
     Classe getClassById(Long id);
+
 }

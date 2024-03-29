@@ -6,8 +6,14 @@ public class CompteResponseDTO {
 	    private int code;
 	    private String description;
 	    private Long classe_id ; 
-	   
+	    private Compte parentCompte;
 		
+		public Compte getParentCompte() {
+			return parentCompte;
+		}
+		public void setParentCompte(Compte parentCompte) {
+			this.parentCompte = parentCompte;
+		}
 		public Long getClasse_id() {
 			return classe_id;
 		}
@@ -40,6 +46,7 @@ public class CompteResponseDTO {
 		}
 	
 	
-	    
+		 public CompteResponseDTO()
+			{}
 
 }

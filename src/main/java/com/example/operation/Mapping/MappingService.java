@@ -38,32 +38,29 @@ public class MappingService implements MappingInterface {
 	    public void copyMessageCfonbsToOperations() {
 	        // Récupérer toutes les lignes de la table messageCfonb
 	        List<MessageCfonb> messageCfonbs = CfonbRepo.findAll();
+	     // Parcourir chaque RawOperation
+	        for (MessageCfonb messageCfonb : messageCfonbs) {		
+	        	// Vérifier si une opération similaire existe dans la table des opérations
+	        	 for (MVT mvt : messageCfonb.getMvt()) {
+	                 
 
-	        // Copier chaque messageCfonb vers la table operation
-	        for (MessageCfonb messageCfonb : messageCfonbs) {
-	        	
-	        	  for (MVT mvt : messageCfonb.getMvt()) {
-	                  Operation operation = new Operation();
-	                  // Copier les attributs de MVT vers Operation
-	                  operation.setDateVal(mvt.getDatevaleur());
-	                  operation.setDateOP(mvt.getDateComptabilisation());
-	                  operation.setMontant(mvt.getMontantMouvment());
+		        boolean operationExists = operationRepo.existsByMontantAndTypeAndDescription(mvt.getMontantMouvment(), 'C', null
+		        		);
+		        
+		     // Si aucune opération similaire n'existe, copier l'opération dans la table des opérations
+		        if (!operationExists) {
+		        	
+		        	   Operation operation = new Operation();
+		                  // Copier les attributs de MVT vers Operation
+		                  operation.setDateVal(mvt.getDatevaleur());
+		                  operation.setDateOP(mvt.getDateComptabilisation());
+		                  operation.setMontant(mvt.getMontantMouvment());
+		                  operation.setStatus("En Attente");
+		  	              operation.setTauxTVA(0);
+		        }
 
-
-	                  operation.setStatus("En Attente");
-	                  // Enregistrer l'opération dans la table operation
-	                  operationRepo.save(operation);
-	              }
-	            Operation operation = new Operation();
-	            // Copier les attributs de messageCfonb vers operation
-	           
-	            operation.setDescription(messageCfonb.getDescription());
-	           
-	            operation.setStatus("En Attente");
-
-	            // Enregistrer l'opération dans la table operation
-	            operationRepo.save(operation);
-	        }
+	    
+	        }}
 	        
 	    
 	    }
@@ -98,8 +95,5 @@ public class MappingService implements MappingInterface {
 	    }
 	}
 
-
-
-	   
 	 }
    

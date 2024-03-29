@@ -13,7 +13,7 @@ import com.example.operation.RawOperation.RawOperation;
 import com.example.operation.cfonbmessage.MessageCfonb;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "localhost:4200")
 @RestController
 @RequestMapping("/api/v1/test/mapping")
 public class MappingController {

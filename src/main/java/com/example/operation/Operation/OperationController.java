@@ -22,7 +22,7 @@ import com.example.operation.Classe.Classe;
 
 
 
-@CrossOrigin(origins = "http://localhost:4200",methods = {RequestMethod.PUT, RequestMethod.OPTIONS})
+@CrossOrigin(origins = "localhost:4200",methods = {RequestMethod.PUT, RequestMethod.OPTIONS})
 @RestController
 @RequestMapping("/api/v1/test")
 public class OperationController {

@@ -16,8 +16,10 @@ import jakarta.transaction.Transactional;
 public class CompteService implements CompteInterface {
 	@Autowired
 	 CompteRepo compRepo ;
+	
+
 	@Autowired
-    private ClasseRepo classRepo;
+   private ClasseRepo classRepo;
 
 
 	 @Transactional
@@ -27,7 +29,7 @@ public class CompteService implements CompteInterface {
 
 	 // Méthode pour récupérer la liste de comptes pour une classe donnée
 	    public List<Compte> getComptesByClasseId(Long classeId) {
-	        Classe classe = classRepo.findById(classeId).orElse(null);
+	        Classe classe = classRepo. findById(classeId).orElse(null);
 	        if (classe != null) {
 	            return compRepo.findComptesByClasse(classe);
 	        }
@@ -89,8 +91,8 @@ public class CompteService implements CompteInterface {
 		    }
 
 		    @Transactional
-		    public CompteResponseDTO mapCompteToResponseDTO(Compte compte) {
-		        CompteResponseDTO responseDTO = new CompteResponseDTO();
+		    public CompteDTO mapCompteToResponseDTO(Compte compte) {
+		    	CompteDTO responseDTO = new CompteDTO();
 		        responseDTO.setId(compte.getId());
 		        responseDTO.setDescription(compte.getDescription());
 		        responseDTO.setLibele(compte.getLibele());
@@ -98,7 +100,7 @@ public class CompteService implements CompteInterface {
 
 		        // Inclure l'ID de la classe associée au compte
 		        if (compte.getClasse() != null) {
-		            responseDTO.setClasse_id(compte.getClasse().getId());
+		            responseDTO.setClasseId(compte.getClasse().getId());
 
 		        }
 
@@ -108,14 +110,23 @@ public class CompteService implements CompteInterface {
 
 		    @Override
 		    @Transactional
-		    public List<CompteResponseDTO> findAllResponseDTO() {
+		    public List<CompteDTO> findAllResponseDTO() {
 		        List<Compte> comptes = compRepo.findAll();
-		        List<CompteResponseDTO> responseDTOs = new ArrayList<>();
+		        List<CompteDTO> responseDTOs = new ArrayList<>();
 		        for (Compte compte : comptes) {
-		            CompteResponseDTO responseDTO = mapCompteToResponseDTO(compte);
+		        	CompteDTO responseDTO = mapCompteToResponseDTO(compte);
 		            responseDTOs.add(responseDTO);
 		        }
 		        return responseDTOs;
 		    }
 
+			@Override
+			public Compte getCompteById(Long id) {
+				if(compRepo.findById(id).isPresent()){
+					return compRepo.findById(id).get();
+				}
+				return null;
+			}
+
+		
 	}
